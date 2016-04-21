@@ -1,0 +1,69 @@
+<hmtl>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+    <script type="text/javascript" src="jQwordList.js"></script>
+    <script type="text/javascript" src="parseTree.js"></script>	
+    <button type="button" id="btTest" class="buttons" onclick="main()">Run</button><br>  
+    <div id="panel"> </div>
+    <span id="testArea" style="visibility:hidden;"></span>
+    
+    
+    <script>
+        function main(){
+        //read a word list - text file
+        var databaseList = readWords("biemiller.txt");
+
+        //defining variables
+        var ascdesc = "bdfghjklpqty";
+        var acenor = "acenorsuvxzwmi";
+        var randomChars = ".'/1234567890-";
+
+        var listWords, poolW, poolL;
+
+        /*
+        @SIGNATURE: selectListWords(wordList, hasnt, minLen, maxLen, fontSize)
+        @PARMS:
+            wordlist = full list of words from wordnet
+            hasnt = charset
+            minLen = minimum Length 
+            maxLen = maximum Length
+            fontsize = font size to be used for getting the width
+
+        @RETURNS: array of objects {word, width, length}
+
+
+        @HOW IT WORKS: SELECT a list of words (WORD, WIDTH, LENGTH) FROM the wordnet list WHERE word doesnt contain hasnt AND word.length>minLength AND word.length<maxLength --WIDTH will be redered in the given fontSize
+        */
+
+        listWords = selectListWords(databaseList,randomChars, 3,15, 20);    
+            
+        $("#panel").html("Selected resulted "+listWords.length+" words.<br>WORD,WIDTH,LENGTH<br>"+wordToText(listWords));    
+
+        /*
+        select a random pool of words from filtered list 2 diffrent versions
+        @SIGNATURE:
+            function selectPoolLength(wordList, nWords, minLength, maxLength)
+            function selectPoolWidth(wordList, nWords, minWidth, maxWidth)
+
+        @PARMS:
+            nWords = number of words you want to select        
+            Length between minLength and maxLength - use min=max for an absolut value for length         
+            Width between minWidth and maxWidth - use min=max for an absolut value for width 
+
+        @RETURNS: array of objects {word, width, length}   
+
+        */
+        //Select words by Width
+        poolW = selectPoolWidth(listWords, 40, 75, 80);
+
+        //Select words by Length
+        poolL = selectPoolLength(listWords, 40, 8, 15);
+            
+        //Select words by Width
+        poolWL = selectPoolWidthLength(listWords, 40, 75, 80, 8, 10);    
+
+        //printing the results on the screen using function wordToText wchi returns the object fields in a string
+       // $("#panel").html(wordToText(poolL)+"Width <br>"+wordToText(poolW));
+
+        }
+    </script>
+</hmtl>
