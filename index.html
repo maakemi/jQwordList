@@ -10,7 +10,7 @@
     <script>
         function main(){
         //read a word list - text file
-        var databaseList = readWords("biemiller.txt");
+        var databaseList = readWords("words2.txt");
 
         //defining variables
         var ascdesc = "bdfghjklpqty";
@@ -35,8 +35,9 @@
         */
 
         listWords = selectListWords(databaseList,randomChars, 3,15, 20);    
-            
-        $("#panel").html("Selected resulted "+listWords.length+" words.<br>WORD,WIDTH,LENGTH<br>"+wordToText(listWords));    
+          
+        //to print the words on the screen    
+        //$("#panel").html("Selected resulted "+listWords.length+" words.<br>WORD,WIDTH,LENGTH<br>"+wordToText(listWords));    
 
         /*
         select a random pool of words from filtered list 2 diffrent versions
@@ -62,7 +63,7 @@
         poolWL = selectPoolWidthLength(listWords, 40, 75, 80, 8, 10);    
 
         //printing the results on the screen using function wordToText wchi returns the object fields in a string
-       // $("#panel").html(wordToText(poolL)+"Width <br>"+wordToText(poolW));
+        $("#panel").html(wordToText(poolL)+"Width <br>"+wordToText(poolW));
 
         }
     </script>

@@ -1,3 +1,16 @@
+/*!
+ * jQwordList library for slecting lists of words considering their length and width
+ *
+ * Version 1.0
+ *
+ * Copyright 2016, Mariana Shimabukuro
+ * 
+ *
+ * Date: 2016-04-22
+*/
+
+
+
 //read words from a given file
 function readWords(path){
     var wordList;
@@ -42,6 +55,7 @@ function selectListWords(wordList, hasnt, minLen, maxLen, fontSize){
         if (pattern.test(word)){ //tests in word doesnt have set of charcter            
             if((word.length>=minLen) && (word.length<=maxLen)){ // tests length of the word
                 word = word.trim();
+                word = word.toLowerCase();
                 str += word+","+getWordSize(word)+","+word.length+"<br>"
                 count++;
                 result.push({word:word, width:getWordSize(word), length:word.length});
